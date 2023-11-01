@@ -1,15 +1,18 @@
 <?php
 require_once 'Model/modelBooks.php';
+require_once 'ApiController/AuthHelper.php';
+require_once 'Apiviews/ApiView.php';
 class ApiControllerBooks{
    
     private $model;
     private $view;
     private $data;
+    private $helper;
 function __construct(){
     $this->model = new ModelBooks();
     $this->view=new ApiView($this);
     $this->data = file_get_contents("php://input"); 
-
+    $this->helper= new Helper();
     
 }
 
@@ -19,7 +22,7 @@ function getData(){
 
 
 
-    function ObtenerBooks($params = []) {
+ function ObtenerBooks() {
         
         $books = $this->model->GetBooks();
         
@@ -29,20 +32,22 @@ function getData(){
 
   function ObtenerBooksById($params = []) {
     // obtiene el parametro de la ruta
-    $id = $params[':ID'];
-        
+    if (is_numeric(isset($params[':ID']))) {
+        $id= $params[':ID'];
+      }
     $booksId = $this->model->GetbookById($id);
     
     if ($booksId) {
         $this->view->response($booksId, 200);   
     } else {
-        $this->view->response("No existe el libro con el id={$id}", 404);
+        $this->view->response("No existe el libro con el id='{$id}'", 404);
     }
 
 }
 
 function CrearLibro(){
      // devuelve el objeto JSON enviado por POST     
+     if ($this->helper->ValidateUser()) {
      $newBook = $this->getData();
 
      // inserta la tarea
@@ -50,34 +55,43 @@ function CrearLibro(){
      $anio= $newBook->anio;
      $descripcion = $newBook->descripcion;
      $autor = $newBook->idAutor;
-    $libronuevo=$this->model->InsertBook($titulo,$anio, $descripcion,$autor);
+     $libronuevo=$this->model->InsertBook($titulo,$anio,$descripcion,$autor);
      
     $libroInsertado= $this->model->ObtenerBooksById($libronuevo);
 
      if ($libroInsertado)
-            $this->view->response($libroInsertado, 200);
+            $this->view->response($libroInsertado, 201);
         else
-            $this->view->response("El libro no fue creado", 500);
+            $this->view->response("El libro no fue creado", 400);
 
 
-}
+} else {
+    $this->view->response("Necesitas estar logueado para realizar la request", 401);
+  };
 
 
   
 }
 
-function ActualizaLibroByid(){
-
+ function ActualizaLibroByid(){
+    if ($this->Helper->validateuser()) {
+        $id = $params[':ID'];
+        if (is_numeric($id)) {
+            $body = $this->getData();
+            $body = $body->titulo;
+            $anio = $body->anio;
+            $descripcion= $body->descripcion;
+           
+            $this->model->updatelibros($titulo, $anio, $descripcion, $id);
+        }  $this->view->response("El libro con id = '{$id}' fue editado", 200);
+    } else {
+      $this->view->response("No se pudo editar el libro con id = '{$id}', asegurarse de colocar todos los campos de la tabla", 400);
+    };
+  } else {
+        $this->view->response("No existe un libro con id = '{$id}' ", 404);
+      };
 }
 
-function EliminaLibroById(){
-    $id = $params[':ID'];
-    $bookEliminado = $this->model->get($id);
-    if ($bookEliminado) {
-        $this->model->DeleteBook($id);
-        $this->view->response("El libro fue borrado con exito.", 200);
-    } else
-        $this->view->response("El libro con el id={$id} no existe", 404);
-}
+
 
 

@@ -5,11 +5,9 @@ class APIView() {
         
         header("Content-Type: application/json");
         header("HTTP/1.1 " . $status . " " . $this->_requestStatus($status));
-        $obj=json_encode($data);
-        echo $obj->titulo,
-        echo $obj->anio,
-        echo $obj->descripcion,
-        echo $obj->idAutor;
+        echo json_encode($data);
+        
+        
 
     
     }
@@ -17,6 +15,9 @@ class APIView() {
          private function _requestStatus($code){
             $status = array(
                 200 => "consulta realizada con exito",
+                201 => "Created",
+                400 => "Bad request",
+                401 => "carece de credenciales válidas de autenticación para el recurso solicitado";
                 404 => "Not found",
                 500 => "Internal Server Error"
               );
