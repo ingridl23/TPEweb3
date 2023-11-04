@@ -19,17 +19,26 @@ $router = new Router();
 
 
 //tabla de ruteo libros
-$router->addRoute('traerlibros', 'GET','ApiControllerBooks', 'ObtenerBooks');//trae todos los  libros con autor
-$router->addRoute('libros/:ID', 'GET','ApiControllerBooks','ObtenerBookbyId');//trae un libro en especifico
-$router->addRouter('libros/:FIELD','GET','ApiControllerAutor','AutoresByLibros'); //trae por titulo ordenado alfabeticamente
-$router->addRoute('libronuevo','POST', 'ApiControllerBooks', 'CrearLibro');//crea
-$router->addRoute('actualizarlibro/:ID', 'PUT', 'ApiControllerBooks', 'ActuaLizalibroById');//actualiza/modifica
+$router->addRoute('libros/traerlibros', 'GET','ApiControllerBooks', 'ObtenerBooks');//trae todos los  libros con autor
+$router->addRoute('autores','GET','ApiControllerAutor','ObtenerAutores');//trae todos los autores
 
-//tabla de ruteo autores
-$router->addRoute('autores','GET','ApiControllerAutor','ObtenerAutores');//trae autores
-$router->addRoute('autores/:FIELD','GET','ApiControllerAutor','ObtenerAutoresByCountry');//trae autores por nacionalidad
-                        //nacionalidad
-$router->addRoute('autoresfield/:FIELD','GET','ApiControllerAutor','ObtenerAutoresByField');//trae por cualquier campo ordenado desc
+//ordenados por un campo
+$router->addRoute('autores/:ORDER/:pais','GET','ApiControllerAutor','ObtenerAutoresByCountry');//trae autores por nacionalidad
+$router->addRouter('libros/:ORDER/:titulo','GET','ApiControllerAutor','LibrosByField'); //trae por titulo ordenado asc o desc (ambas)
+
+//trae por cualquier campo ordenado especificando desc o asc  (ambas)        
+$router->addRoute('libros/:ORDER/:FIELD','GET','ApiControllerAutor','ObtenerlibrosByFieldByOrder');
+
+$router->addRoute('libros/:ID','GET','ApiControllerBooks','ObtenerBookbyId');//trae un libro en especifico por id
+
+$router->addRoute('libros/libronuevo','POST', 'ApiControllerBooks', 'CrearLibro');//crea
+$router->addRoute('libros/actualizarlibro/:ID', 'PUT', 'ApiControllerBooks', 'ActuaLizalibroById');//actualiza/modifica
+
+//trae libros de forma paginada
+$router->addRoute('libros/paginarbooks/:PAGENUMBER','GET', 'ApiControllerBooks', 'GetPaginateBooks'); //paginar
+//token
+
+ 
 
 // rutea      // recurso solicitado       // método utilizado
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
