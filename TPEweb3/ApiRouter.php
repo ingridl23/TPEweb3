@@ -2,14 +2,9 @@
 require_once 'libs/Router.php';
 require_once 'ApiController/ApiControllerBooks.php';
 require_once 'ApiController/ApiControllerAutores.php';
+require_once 'ApiController/ApiController.php';
 
 define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
-
-
-
-
-
-
 
 
 // crea el router
@@ -37,7 +32,7 @@ $router->addRoute('libros/actualizarlibro/:ID', 'PUT', 'ApiControllerBooks', 'Ac
 //trae libros de forma paginada
 $router->addRoute('libros/paginarbooks/:PAGENUMBER','GET', 'ApiControllerBooks', 'GetPaginateBooks'); //paginar
 //token
-
+$router->addRoute("auth/token", 'GET', 'AuthApiController', 'getToken');
  
 
 // rutea      // recurso solicitado       // método utilizado
