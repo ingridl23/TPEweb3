@@ -3,7 +3,7 @@ class APIView() {
 
     public function response($data, $status) {
         
-        header("Content-Type: application/json");
+        header("Content-Type:application/json");
         header("HTTP/1.1 " . $status . " " . $this->_requestStatus($status));
         echo json_encode($data);
         
