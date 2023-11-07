@@ -13,28 +13,30 @@ $router = new Router();
 // define la tabla de ruteo
 
 
-//tabla de ruteo libros
-$router->addRoute('libros', 'GET','ApiControllerBooks', 'ObtenerBooks');//trae todos los  libros con autor
-$router->addRoute('autores','GET','ApiControllerAutor','ObtenerAutores');//trae todos los autores
+
+$router->addRoute('libros', 'GET','ApiControllerBooks', 'ObtenerBooks');//trae todos los  libros con autor  //ya anda//
+$router->addRoute('autores','GET','ApiControllerAutores','ObtenerAutores');//trae todos los autores  //ya anda//
 
 //ordenados por un campo
-$router->addRoute('autores/:ORDER/:pais','GET','ApiControllerAutor','ObtenerAutoresByCountry');//trae autores por nacionalidad
-$router->addRouter('libros/:ORDER/:titulo','GET','ApiControllerAutor','LibrosByField'); //trae por titulo ordenado asc o desc (ambas)
+$router->addRoute('autores/:ORDER/:FIELD','GET','ApiControllerAutores','ObtenerAutoresByField');//trae autores por campo ordenados // ya anda
 
-//trae por cualquier campo ordenado especificando desc o asc  (ambas)        
-$router->addRoute('libros/:ORDER/:FIELD','GET','ApiControllerAutor','ObtenerlibrosByFieldByOrder');
+$router->addRoute('libros/:ORDER/:FIELD','GET', 'ApiControllerBooks','ObtenerLibrosByField'); //libros ordenados  // ya anda
 
-$router->addRoute('libros/:ID','GET','ApiControllerBooks','ObtenerBookbyId');//trae un libro en especifico por id
+$router->addRoute('libros/:ID','GET','ApiControllerBooks','ObtenerBookbyId');//trae un libro en especifico por id //ya anda
 
-$router->addRoute('libros/:ID','POST', 'ApiControllerBooks', 'CrearLibro');//crea
-$router->addRoute('libros/:ID', 'PUT', 'ApiControllerBooks', 'ActuaLizalibroById');//actualiza/modifica
+$router->addRoute('autores/:ID','GET', 'ApiControllerAutores','ObtenerAutorById');//trae autor por id  // ya anda
+
+$router->addRoute('libros/:ID','POST', 'ApiControllerBooks', 'CrearLibro');//crea 
+
+$router->addRoute('libros/:ID','PUT', 'ApiControllerBooks', 'ActuaLizalibroById');//actualiza/modifica
+
 $router->addRoute('libros/:ID','DELETE','ApiControllerBooks','deletebook');//eliminar un libro en especifico
+
 //trae libros de forma paginada
-$router->addRoute('libros/paginarbooks/:PAGENUMBER','GET', 'ApiControllerBooks', 'GetPaginateBooks'); //paginar
+$router->addRoute('libros/paginarbooks/:PAGENUMBER/:PAGENUMBERof','GET', 'ApiControllerBooks', 'GetPaginateBooks'); //paginar
 //token
 $router->addRoute("auth/token", 'GET', 'AuthApiController','getToken');
  
 
 // rutea      // recurso solicitado       // método utilizado
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
-

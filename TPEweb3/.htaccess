@@ -1,4 +1,3 @@
-
 <IfModule mod_rewrite.c>
 	RewriteEngine On
      RewriteCond %{HTTP:Authorization} ^(.+)$
@@ -9,6 +8,6 @@
 
     RewriteRule \.(?:css|js|jpe?g|gif|png)$ - [L]
 
-    RewriteRule ^api/(.*)$apiRouter.php?resource=$1 [QSA,L,END]
-    RewriteRule ^(.*)$route.php?action=$1 [QSA,L]
+    RewriteRule ^api/(.*)$ apiRouter.php?resource=$1 [QSA,L,END]
+    RewriteRule ^(.*)$ route.php?action=$1 [QSA,L]
 </IfModule>

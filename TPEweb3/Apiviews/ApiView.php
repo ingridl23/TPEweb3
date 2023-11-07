@@ -1,5 +1,5 @@
 <?php
-class APIView() {
+   class APIView{
 
     public function response($data, $status) {
         
@@ -17,7 +17,7 @@ class APIView() {
                 200 => "consulta realizada con exito",
                 201 => "Created",
                 400 => "Bad request",
-                401 => "carece de credenciales válidas de autenticación para el recurso solicitado";
+                401 => "carece de credenciales válidas de autenticación para el recurso solicitado",
                 404 => "Not found",
                 500 => "Internal Server Error"
               );

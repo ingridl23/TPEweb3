@@ -21,7 +21,7 @@ function getData(){
     return json_decode($this->data); 
 }  
 
- function ObtenerBooks($params=null) {
+ function ObtenerBooks() {
         
         $books = $this->model->GetBooks();
         
@@ -29,21 +29,20 @@ function getData(){
        
   }
 
-  function ObtenerBooksById($params = []) {
-    // obtiene el parametro de la ruta
-    if (is_numeric(isset($params[':ID']))) {
-        $id= $params[':ID'];
-        $booksId = $this->model->GetbookById($id);
-
-      }
-
-    if ($booksId) {
-        $this->view->response($booksId, 200);   
+  public function ObtenerBookbyId($params = []) {
+       $Id = $params[':ID'];
+    if(is_numeric($Id)){
+      $book = $this->model->GetbookById($Id);
+      if ($book) {
+        $this->view->response($book, 200);
+      } else {
+        $this->view->response("No existe el libro con el id={$Id} indicado", 404);
+      };
     } else {
-        $this->view->response("No existe el libro con el id='{$id}'", 404);
-    }
+      $this->view->response("Asegurese que el ID escrito sea numerico", 400);
+    };
+  }
 
-}
 
 function CrearLibro($params=null){
      // devuelve el objeto JSON enviado por POST 
@@ -57,7 +56,7 @@ function CrearLibro($params=null){
 
      }else{
       $libronuevo=$this->model->InsertBook($newBook->titulo,$newBook->anio,$newBook->descripcion,$newBook->idAutor);
-      $this->view->response("libro insertado con exito"$libroInsertado,201);
+      $this->view->response("libro insertado con exito",201);
      }   
 
 } else {
@@ -101,7 +100,32 @@ function deleteBook($params=null){
                      }
                        }
                          }
-                           }
+                           
 
 
-
+                           public function ObtenerLibrosByField($params = []) {
+                            if (isset($params[':FIELD'])) {
+                              $fieldOrder = $params[':FIELD'];
+                            } else {
+                              $fieldOrder = 'titulo'; 
+                            };
+                            $columnNames = $this->model->getColumns();
+                            for ($i=0; $i < count($columnNames) ; $i++) { 
+                                 if($columnNames[$i] == $fieldOrder){
+                                   $validateField = $fieldOrder;
+                                  }
+                            } 
+                            if (isset($params[':ORDER'])) {
+                              $order = 'desc'; 
+                            } else {
+                              $order = 'asc'; 
+                            };
+                            if (isset($validateField)) {
+                              $orderedLibros = $this->model->getOrderlibros($validateField, $order);
+                              return $this->view->response($orderedLibros, 200);
+                            } else {
+                              return $this->view->response("no existe el campo designado para ordenar = '{$fieldOrder}' en la tabla de Libros", 404);
+                            };
+                          }
+                    }
+                  
