@@ -27,6 +27,7 @@ $router->addRoute('libros/:ID','GET','ApiControllerBooks','ObtenerBookbyId');//t
 $router->addRoute('autores/:ID','GET', 'ApiControllerAutores','ObtenerAutorById');//trae autor por id  // ya anda
 
 $router->addRoute('libros/:ID','POST', 'ApiControllerBooks', 'CrearLibro');//crea 
+$router->addRoute('autores/:ID','POST', 'ApiControllerAutores', 'CrearAutor'); //crea
 
 $router->addRoute('libros/:ID','PUT', 'ApiControllerBooks', 'ActuaLizalibroById');//actualiza/modifica
 

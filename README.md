@@ -1,14 +1,25 @@
 # TPEweb3
- h0la hola 
+  
 
- endpoint de la api tabla libros es: http://localhost/tucarpetalocal/tucarpetalocal/api/libros
+## El endpoint de la api tabla libros es: http://localhost/tucarpetalocal/tucarpetalocal/api/libros
 
- endpoint de la api tabla autores es :http://localhost/tucarpetalocal/tucarpetalocal/api/autores
-
-
+## El endpoint de la api tabla autores es :http://localhost/tucarpetalocal/tucarpetalocal/api/autores
 
 
-## ejemplo de request post:
+# ENDOPINTS POR METODO GET :
+
+* ### http://localhost/tucarpetalocal/tucarpetalocal/api/libros : ###Este endpoint trae todos los libros de la bbdd tp_web2 con los datos unidos de las tablas libros y autor .
+
+* ### http://localhost/tucarpetalocal/tucarpetalocal/api/autores : ### Este endpoint trae listado todos los autores de su tabla con nombre 'autor'.
+
+* #### http://localhost/tucarpetalocal/tucarpetalocal/api/libros/:ID : ### este endpoint trae un libro por id especificado. En caso que no exista el id se te notificara el respectivo error.
+
+*
+*
+
+# ENDPOINTS POR METODO POST :
+
+## ejemplo de request post: http://localhost/TPEWEB3/api/libros
 
 
 ```json
@@ -20,3 +31,9 @@
  }
  ```
  
+
+# ENDPOINT POR METODO PUT:
+
+# ENDPOINT POR METODO DELETE:
+
+# ENDPOINT PARA TOKEN :

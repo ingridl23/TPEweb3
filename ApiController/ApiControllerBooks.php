@@ -13,7 +13,7 @@ function __construct(){
     $this->model = new ModelBooks();
     $this->view=new ApiView($this);
     $this->data = file_get_contents("php://input"); 
-    $this->helper= new Helper();
+   // $this->helper= new Helper();
     
 }
 
@@ -44,29 +44,37 @@ function getData(){
   }
 
 
-function CrearLibro($params=null){
-     // devuelve el objeto JSON enviado por POST 
+public function CrearLibro() { 
+  //if ($this->secHelper->isLoggedIn()) {
+    $body = $this->getData();
+    if (!empty($body->titulo) && !empty($body->anio) && !empty($body->descripcion) && !empty($body->idAutor)){
+      $titulo = $body->titulo;
+      $date = $body->anio;
+      $descripcion = $body->descripcion;
+      $idautor = $body->idAutor;
 
-     if ($this->helper->ValidateUser()){
-     $newBook = $this->getData();
 
-     // inserta la tarea
-     if(empty($newBook->titulo)||empty($newBook->anio)|| empty($newBook->descripcion) || empty($newBook->idAutor)){
-      $this->view->response("El libro no fue creado, complete los campos", 400);
+      $newBook = $this->model->InsertBook($titulo,$date,$descripcion,$idautor);
+      if($newBook) {
+        $this->view->response("Se ha creado un nuevo libro con la id = '{$newBook}' ",201);
+      } else {
+        $this->view->response("El libro no fue creado", 500);
+      };
+    } else {
+      $this->view->response("No se ha podido crear un nuevo libro, asegurese de colocar todos los campos de la tabla ", 400);
+    }//else {
+     // $this->view->response("Necesitas estar logueado para realizar la request", 401);
+  //} 
+    }
+    
+      
+    
+     
 
-     }else{
-      $libronuevo=$this->model->InsertBook($newBook->titulo,$newBook->anio,$newBook->descripcion,$newBook->idAutor);
-      $this->view->response("libro insertado con exito",201);
-     }   
 
-} else {
-   $this->view->response("Necesitas estar logueado para realizar la request", 401);
-  }
-  
-}
 
  function ActualizaLibroByid(){
-    if ($this->Helper->validateuser()) {
+   // if ($this->Helper->validateuser()) {
          $id = $params[':ID'];
              if (is_numeric($id)) {
                 $body = $this->getData();
@@ -79,14 +87,14 @@ function CrearLibro($params=null){
                } else {
                       $this->view->response("No se pudo editar el libro con id = '{$id}', asegurarse de colocar todos los campos de la tabla", 400);
                                      };
-     } else {
-           $this->view->response("No existe un libro con id = '{$id}' ", 404);
-      }
+    // } else {
+     //      $this->view->response("No existe un libro con id = '{$id}' ", 404);
+     // }
 }
 
 function deleteBook($params=null){
 
-  if ($this->Helper->validateuser()){
+ // if ($this->Helper->validateuser()){
         $id = $params [':ID'];
 
         $libro= $this->model->GetbookById($id);
@@ -99,11 +107,11 @@ function deleteBook($params=null){
                       $this->view->response("No hay libros para eliminar con el id= $id",404);
                      }
                        }
-                         }
+                         
                            
 
 
-                           public function ObtenerLibrosByField($params = []) {
+                      function ObtenerLibrosByField($params = []) {
                             if (isset($params[':FIELD'])) {
                               $fieldOrder = $params[':FIELD'];
                             } else {
@@ -128,4 +136,5 @@ function deleteBook($params=null){
                             };
                           }
                     }
+                  
                   
