@@ -25,14 +25,14 @@ class AuthApiController extends ApiController {
         $userpass = explode(":", $userpass);
         $user = $userpass[0];
         $pass = $userpass[1];
-        if($user == "Admin" && $pass == "web"){
+        if($user == "webdmin" && $pass == "admin"){
             $header = array(
                 'alg' => 'HS256',
                 'typ' => 'JWT'
             );
             $payload = array(
                 'id' => 1,
-                'name' => "Admin",
+                'name' => "webadmin",
                 'exp' => time()+3600
             );
             $header = base64url_encode(json_encode($header));

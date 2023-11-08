@@ -48,14 +48,14 @@ public function CrearLibro() {
   //if ($this->secHelper->isLoggedIn()) {
     $body = $this->getData();
     if (!empty($body->titulo) && !empty($body->anio) && !empty($body->descripcion) && !empty($body->idAutor)){
-      $titulo = $body->titulo;
-      $date = $body->anio;
-      $descripcion = $body->descripcion;
-      $idautor = $body->idAutor;
+         $titulo = $body->titulo;
+         $date = $body->anio;
+        $descripcion = $body->descripcion;
+        $idautor = $body->idAutor;
 
 
-      $newBook = $this->model->InsertBook($titulo,$date,$descripcion,$idautor);
-      if($newBook) {
+        $newBook = $this->model->InsertBook($titulo,$date,$descripcion,$idautor);
+   if($newBook) {
         $this->view->response("Se ha creado un nuevo libro con la id = '{$newBook}' ",201);
       } else {
         $this->view->response("El libro no fue creado", 500);
@@ -73,9 +73,9 @@ public function CrearLibro() {
 
 
 
- function ActualizaLibroByid(){
+ function ActualizaLibroById($params=null){
    // if ($this->Helper->validateuser()) {
-         $id = $params[':ID'];
+         $id = $params [':ID'];
              if (is_numeric($id)) {
                 $body = $this->getData();
                  if(empty($body->titulo)|| empty($body->anio)|| empty($body->descripcion)){
@@ -113,28 +113,44 @@ function deleteBook($params=null){
 
                       function ObtenerLibrosByField($params = []) {
                             if (isset($params[':FIELD'])) {
-                              $fieldOrder = $params[':FIELD'];
+                                $fieldOrder = $params[':FIELD'];
                             } else {
-                              $fieldOrder = 'titulo'; 
+                                $fieldOrder = 'titulo'; 
                             };
-                            $columnNames = $this->model->getColumns();
-                            for ($i=0; $i < count($columnNames) ; $i++) { 
-                                 if($columnNames[$i] == $fieldOrder){
-                                   $validateField = $fieldOrder;
-                                  }
+                                $columnNames = $this->model->getColumns();
+                                   for ($i=0; $i < count($columnNames) ; $i++) { 
+                                       if($columnNames[$i] == $fieldOrder){
+                                          $validateField = $fieldOrder;
+                                           }
                             } 
-                            if (isset($params[':ORDER'])) {
-                              $order = 'desc'; 
-                            } else {
-                              $order = 'asc'; 
-                            };
-                            if (isset($validateField)) {
-                              $orderedLibros = $this->model->getOrderlibros($validateField, $order);
-                              return $this->view->response($orderedLibros, 200);
-                            } else {
-                              return $this->view->response("no existe el campo designado para ordenar = '{$fieldOrder}' en la tabla de Libros", 404);
-                            };
-                          }
-                    }
+                                  if (isset($params[':ORDER'])) {
+                                     $order = 'desc'; 
+                                      } else {
+                                        $order = 'asc'; 
+                                                        };
+                                           if (isset($validateField)) {
+                                               $orderedLibros = $this->model->getOrderlibros($validateField, $order);
+                                                return $this->view->response($orderedLibros, 200);
+                                                  } else {
+                                                      return $this->view->response("no existe el campo designado para ordenar = '{$fieldOrder}' en la tabla de Libros", 404);
+                                                               };
+                                                                   }
+
+                         function GetPaginatedBooks($params = []) {
+                            $pageBook = intval($params[":PAGENUMBER"]);
+                              $books = $this->model->GetBooks();
+                                $totalBooks = count($books); 
+                                 $BooksPerPage = 3; 
+                                   $start = ($pageBook - 1) * $BooksPerPage; 
+                                    $totalPages = ceil($totalGames / $BooksPerPage);
+                                      if ($pageBook > 0 && $pageBook <= $totalPages) {
+                                         $page = $this->model->pagesBooks($start, $booksPerPage);
+                                           $this->view->response($books, 200);
+                                                  } else {
+                                                       $this->view->response("la pagina no existe", 404);
+                                                               }
+                                                                 }
+
+                                                                   }
                   
                   
