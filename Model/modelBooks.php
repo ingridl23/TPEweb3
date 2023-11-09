@@ -68,11 +68,12 @@ function updatelibros($t,$a,$d,$id){//edita un libro//
     return $query->fetchAll(PDO::FETCH_OBJ);
 }
 
-public function pagesBooks($start, $BooksPerPage) {
-    $query = $this->conexion->prepare('SELECT * FROM libros where LIMIT ' . $start . ' , ' . $BooksPerPage . '');
+public function pagesBooks($start, $BookspageSize) {
+    $query = $this->conexion->prepare('SELECT * FROM `libros`  LIMIT ' . $start . ', ' . $BookspageSize );
     $query->execute();
     $resp= $query->fetchAll(PDO::FETCH_OBJ);
     return $resp;
 }
 }
 
+//JOIN autor ON autor.id_autor = libros.id_autor

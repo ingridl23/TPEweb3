@@ -136,21 +136,29 @@ function deleteBook($params=null){
                                                                };
                                                                    }
 
-                         function GetPaginatedBooks($params = []) {
-                            $pageBook = intval($params[":PAGENUMBER"]);
-                              $books = $this->model->GetBooks();
-                                $totalBooks = count($books); 
-                                 $BooksPerPage = 3; 
-                                   $start = ($pageBook - 1) * $BooksPerPage; 
-                                    $totalPages = ceil($totalGames / $BooksPerPage);
-                                      if ($pageBook > 0 && $pageBook <= $totalPages) {
-                                         $page = $this->model->pagesBooks($start, $booksPerPage);
-                                           $this->view->response($books, 200);
-                                                  } else {
-                                                       $this->view->response("la pagina no existe", 404);
-                                                               }
-                                                                 }
 
-                                                                   }
-                  
+                        function GetPaginateBooks($params = []) {
+                         
+                          $pageNumber = intval($params[':PAGENUMBER']); 
+                          $books = $this->model->GetBooks();
+                          $totalBooks = count($books); 
+                          $BookspageSize = 2; 
+                          $startFrom = ($pageNumber - 1) * $BookspageSize; 
+                          $totalPages = ceil($totalBooks / $BookspageSize);
+                      
+                          if ($pageNumber > 0 && $pageNumber <= $totalPages) {
+                              $page = $this->model->pagesBooks($startFrom, $BookspageSize); 
+                              $this->view->response($page, 200);
+                          } else {
+                              $this->view->response("la pagina no existe", 404);
+                          }
+                      }
+                    }
+
+
+
+
+
+
+                                                                
                   
