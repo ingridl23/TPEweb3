@@ -49,7 +49,7 @@ public function DeleteBook($id){
 function updatelibros($t,$a,$d,$id){//edita un libro//
      $consulta="UPDATE libros SET titulo= '$t',Anio='$a', descripcion='$d' WHERE  id_libros= $id";
      $query=$this->conexion->prepare($consulta);
-     $query->execute([]);
+     $query->execute();
     // $modificacion=$query->fetchAll(PDO::FETCH_ASSOC);
     // return $modificacion;
     
@@ -62,9 +62,9 @@ function updatelibros($t,$a,$d,$id){//edita un libro//
 }
 
  function getOrderLibros($field, $order) {
-    $consulta=('SELECT * FROM libros ORDER BY ' . $field . ' ' . $order . '');
+    $consulta=('SELECT * FROM libros ORDER BY  ? ? ');
     $query = $this->conexion->prepare($consulta);
-    $query->execute();
+    $query->execute([$field,$order]);
     return $query->fetchAll(PDO::FETCH_OBJ);
 }
 
@@ -75,5 +75,3 @@ public function pagesBooks($start, $BookspageSize) {
     return $resp;
 }
 }
-
-//JOIN autor ON autor.id_autor = libros.id_autor

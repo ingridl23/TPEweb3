@@ -20,8 +20,9 @@ $router->addRoute('autores','GET','ApiControllerAutores','ObtenerAutores');//tra
 
 //ordenados por un campo 
 $router->addRoute('autores/:ORDER/:FIELD','GET','ApiControllerAutores','ObtenerAutoresByField');//trae autores por campo ordenados // ya anda
-
-$router->addRoute('libros/:ORDER/:FIELD','GET', 'ApiControllerBooks','ObtenerLibrosByField'); //libros ordenados  // ya anda
+//trae libros de forma paginada
+$router->addRoute('libros/page/:PAGENUMBER','GET','ApiControllerBooks', 'GetPaginateBooks'); //paginar //ya anda
+$router->addRoute('libros/:ORDER/:FIELD','GET', 'ApiControllerBooks','ObtenerLibrosByField'); //libros ordenados y tambien por campo // ya anda
 
 $router->addRoute('libros/:ID','GET','ApiControllerBooks','ObtenerBookbyId');//trae un libro en especifico por id //ya anda
 
@@ -34,8 +35,7 @@ $router->addRoute('libros/:ID','PUT','ApiControllerBooks','ActuaLizalibroById');
 
 $router->addRoute('libros/:ID','DELETE','ApiControllerBooks','deletebook'); // eliminar un libro en especifico //ya anda
 
-//trae libros de forma paginada
-$router->addRoute('libros/page/:PAGENUMBER','GET','ApiControllerBooks', 'GetPaginateBooks'); //paginar //todavia no anda me salta a otra funcion segun chat gpt no encuentra ningun error
+
 //token
 $router->addRoute("auth/token", 'GET', 'AuthApiController','getToken'); //no se a probado
  
