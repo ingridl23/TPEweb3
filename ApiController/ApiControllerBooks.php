@@ -7,9 +7,10 @@ class ApiControllerBooks extends ApiController {
     private $model;
  
 
-function __construct(){
+ function __construct(){
+    parent::__construct();
     $this->model = new ModelBooks();
-  
+    
 }
 
 
@@ -84,6 +85,7 @@ public function CrearLibro() {
           $this->view->response("No existe un libro con id = '{$id}' ", 404);
      // }
 }
+ }
 
 function deleteBook($params=[]){
 
@@ -144,18 +146,10 @@ function deleteBook($params=[]){
                       
                           if ($pageNumber > 0 && $pageNumber <= $totalPages) {
                               $page = $this->model->pagesBooks($startFrom, $BookspageSize); 
-                              $this->view->response($page, 200);
+                                  $this->view->response($page, 200);
                           } else {
                               $this->view->response("la pagina no existe", 404);
                           }
                       }
                     }
-                  }
-
-
-
-
-
-
-                                                                
-                  
+                

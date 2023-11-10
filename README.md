@@ -51,7 +51,16 @@ El endpoint de la API es: http://localhost/tucarpetalocal/api/
         "id_autor": 2
  }
  ```
- 
+
+ ```json
+  {
+        "titulo": "Cronicas De Una novela ",
+        "Anio": 2023,
+        "descripcion": "nueva descripcion de la novela",
+        "id_Autor": "3"
+        
+ }
+ ```
  
 
 # ENDPOINT POR METODO POST:

@@ -3,7 +3,7 @@ require_once 'ApiController/AuthHelper.php';
 class SecurityHelper {
     private $helper;
     function __construct(){
-        $this->helper= new Helper();
+      //  $this->helper= new Helper();
     }
     function getToken() {
         $auth = $this->getAuthHeader(); 
