@@ -47,12 +47,12 @@ public function DeleteBook($id){
 //actualizar tarea//
 
 function updatelibros($t,$a,$d,$id){//edita un libro//
-     $consulta="UPDATE libros SET titulo= '$t',Anio='$a', descripcion='$d' WHERE  id_libros= $id";
-     $query=$this->conexion->prepare($consulta);
-     $query->execute();
-    // $modificacion=$query->fetchAll(PDO::FETCH_ASSOC);
-    // return $modificacion;
-    
+    $consulta="UPDATE libros SET titulo= '$t',Anio='$a', descripcion='$d' WHERE  id_libros= $id";
+    $query=$this->conexion->prepare($consulta);
+    $query->execute();
+   // $modificacion=$query->fetchAll(PDO::FETCH_ASSOC);
+   // return $modificacion;
+   
 }
 
  function getColumns() {
