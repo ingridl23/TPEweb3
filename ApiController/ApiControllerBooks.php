@@ -7,39 +7,35 @@ class ApiControllerBooks extends ApiController{
   private $model;
 
 
-  function __construct()
-  {
+  function __construct(){
     parent::__construct();
     $this->model = new ModelBooks();
   }
 
 
-  function ObtenerBooks()
-  {
+  function ObtenerBooks(){
 
     $books = $this->model->GetBooks();
 
     $this->view->response($books, 200);
   }
 
-  public function ObtenerBookbyId($params = [])
-  {
+  public function ObtenerBookbyId($params = []){
     $Id = $params[':ID'];
     if (is_numeric($Id)) {
-      $book = $this->model->GetbookById($Id);
+        $book = $this->model->GetbookById($Id);
       if ($book) {
-        $this->view->response($book, 200);
+          $this->view->response($book, 200);
       } else {
-        $this->view->response("No existe el libro con el id={$Id} indicado", 404);
+         $this->view->response("No existe el libro con el id={$Id} indicado", 404);
       };
     } else {
-      $this->view->response("Asegurese que el ID escrito sea numerico", 400);
+       $this->view->response("Asegurese que el ID escrito sea numerico", 400);
     };
   }
 
 
-  public function CrearLibro()
-  {
+  public function CrearLibro(){
     //if ($this->secHelper->isLoggedIn()) {
     $body = $this->getData();
     if (!empty($body->titulo) && !empty($body->anio) && !empty($body->descripcion) && !empty($body->idAutor)) {
@@ -68,15 +64,14 @@ class ApiControllerBooks extends ApiController{
 
   
 
-  function ActualizaLibroById($params = null)
-  {
+  function ActualizaLibroById($params = null){
     // if ($this->Helper->validateuser()) {
     if (isset($params[':ID'])) {
 
       $id =  $params[':ID'];
     }
     if (is_numeric($id)) {
-      $body = $this->getData();
+       $body = $this->getData();
       if (!empty((array) $body)) {
         $this->model->updatelibros($body->titulo, $body->anio, $body->descripcion, $id);
         $this->view->response("El libro con id = '{$id}' fue editado", 200);
@@ -89,8 +84,7 @@ class ApiControllerBooks extends ApiController{
     }
   }
 
-  function deleteBook($params = [])
-  {
+  function deleteBook($params = []){
 
     // if ($this->Helper->validateuser()){
     if (isset($params[':ID'])) {
@@ -112,8 +106,7 @@ class ApiControllerBooks extends ApiController{
 
 
 
-  function ObtenerLibrosByField($params = [])
-  {
+  function ObtenerLibrosByField($params = []){
     if (isset($params[':FIELD'])) {
       $fieldOrder = $params[':FIELD'];
     } else {
@@ -131,7 +124,7 @@ class ApiControllerBooks extends ApiController{
       $order = 'asc';
     };
     if (isset($validateField)) {
-      $orderedLibros = $this->model->getOrderlibros($validateField, $order);
+      $orderedLibros = $this->model->getOrderLibros($validateField, $order);
       return $this->view->response($orderedLibros, 200);
     } else {
       return $this->view->response("no existe el campo designado para ordenar = '{$fieldOrder}' en la tabla de Libros", 404);
@@ -139,8 +132,7 @@ class ApiControllerBooks extends ApiController{
   }
 
 
-  function GetPaginateBooks($params = [])
-  {
+  function GetPaginateBooks($params = []){
 
     $pageNumber = intval($params[':PAGENUMBER']);
     $books = $this->model->GetBooks();
@@ -156,12 +148,12 @@ class ApiControllerBooks extends ApiController{
       $this->view->response("la pagina no existe", 404);
     }
   }
-}
+
  
 
 function deleteBook($params=[]){
 
- // if ($this->Helper->validateuser()){
+
            if(isset($params[':ID'])){
 
              $id = $params [':ID'];
@@ -181,7 +173,7 @@ function deleteBook($params=[]){
                            
 
 
-             function ObtenerLibrosByField($params = []) {
+             function ObtenerLibrosByField($params = []){
                         if (isset($params[':FIELD'])) {
                           $fieldOrder = $params[':FIELD'];
                         } else {
@@ -209,7 +201,7 @@ function deleteBook($params=[]){
                                              
 
 
-                        function GetPaginateBooks($params = []) {
+                        function GetPaginateBooks($params = []){
                          
                           $pageNumber = intval($params[':PAGENUMBER']); 
                           $books = $this->model->GetBooks();
@@ -225,5 +217,5 @@ function deleteBook($params=[]){
                               $this->view->response("la pagina no existe", 404);
                           }
                       }
-                    
+}
                 

@@ -15,35 +15,30 @@ $router = new Router();
 
 
 
-$router->addRoute('libros', 'GET','ApiControllerBooks', 'ObtenerBooks');//trae todos los  libros con autor  //ya anda//
-$router->addRoute('autores','GET','ApiControllerAutores','ObtenerAutores');//trae todos los autores  //ya anda//
+$router->addRoute('libros', 'GET','ApiControllerBooks', 'ObtenerBooks');//trae todos los  libros con autor  
+$router->addRoute('autores','GET','ApiControllerAutores','ObtenerAutores');//trae todos los autores  
 
 //ordenados por un campo 
-$router->addRoute('autores/:ORDER/:FIELD','GET','ApiControllerAutores','ObtenerAutoresByField');//trae autores por campo y ordenados // ya anda
+$router->addRoute('autores/:ORDER/:FIELD','GET','ApiControllerAutores','ObtenerAutoresByField');//trae autores por campo y ordenados 
 //trae libros de forma paginada
-$router->addRoute('libros/page/:PAGENUMBER','GET','ApiControllerBooks', 'GetPaginateBooks'); //paginar //ya anda
+$router->addRoute('libros/page/:PAGENUMBER','GET','ApiControllerBooks', 'GetPaginateBooks'); //se obtiene los libros paginados
 
-$router->addRoute('libros/:ORDER/:FIELD','GET', 'ApiControllerBooks','ObtenerLibrosByField'); //libros ordenados y tambien por campo // ya anda
+$router->addRoute('libros/:ORDER/:FIELD','GET', 'ApiControllerBooks','ObtenerLibrosByField'); //libros ordenados y tambien por campo 
 
-$router->addRoute('libros/:ID','GET','ApiControllerBooks','ObtenerBookbyId');//trae un libro en especifico por id //ya anda
+$router->addRoute('libros/:ID','GET','ApiControllerBooks','ObtenerBookbyId');//trae un libro en especifico por id 
 
-$router->addRoute('autores/:ID','GET', 'ApiControllerAutores','ObtenerAutorById');//trae autor por id  // ya anda
+$router->addRoute('autores/:ID','GET', 'ApiControllerAutores','ObtenerAutorById');//trae autor por id
 
-<<<<<<< HEAD
 $router->addRoute('libros','POST', 'ApiControllerBooks', 'CrearLibro');//crea 
-$router->addRoute('autores/:ID','POST', 'ApiControllerAutores', 'CrearAutor'); //crea 
-=======
-$router->addRoute('libros','POST', 'ApiControllerBooks', 'CrearLibro');//crea //ya anda(agregar a readme)*
-$router->addRoute('autor','POST', 'ApiControllerAutores', 'CrearAutor'); //crea //ya anda(agregar a readme)*
+$router->addRoute('autor','POST', 'ApiControllerAutores', 'CrearAutor'); //crea 
 
 
-$router->addRoute('libros/:ID','PUT','ApiControllerBooks','ActuaLizalibroById');//actualiza/modifica libro //ya anda (agregar a readme)* 
+$router->addRoute('libros/:ID','PUT','ApiControllerBooks','ActuaLizalibroById');//actualiza/modifica libro 
 
-$router->addRoute('autores/:ID','PUT','ApiControllerAutores','ActualizaAutorById');//actualiza/modifica autor //ya andaria (agregar a readme)*  
->>>>>>> fed2a3ded2a4c99c400eb84f6e22c768f13405d8
+$router->addRoute('autores/:ID','PUT','ApiControllerAutores','ActualizaAutorById');//actualiza/modifica autor   
 
 
-$router->addRoute('libros/:ID','DELETE','ApiControllerBooks','deletebook'); // eliminar un libro en especifico //ya anda
+$router->addRoute('libros/:ID','DELETE','ApiControllerBooks','deletebook'); // eliminar un libro en especifico 
 
 
 

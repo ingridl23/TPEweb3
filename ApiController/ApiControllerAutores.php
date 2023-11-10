@@ -1,39 +1,24 @@
 <?php
 require_once 'Model/modelAutores.php';
+require_once 'ApiController/ApiController.php';
 
-require_once 'Apiviews/ApiView.php';
 
-class ApiControllerAutores
-{
+class ApiControllerAutores extends ApiController{
 
   private $model;
-  private $view;
-  private $data;
-  private $helper;
 
-  function __construct()
-  {
+
+  function __construct() {
+    parent::__construct();
     $this->model = new modeloAutor();
-    $this->view = new ApiView($this);
-    $this->data = file_get_contents("php://input");
-    //$this->helper= new Helper();
-
   }
 
-  function getData()
-  {
-    return json_decode($this->data);
-  }
-
-
-  function ObtenerAutores()
-  {
+  function ObtenerAutores(){
     $autores = $this->model->getautores();
     $this->view->response($autores, 200);
   }
 
-  public function ObtenerAutoresByField($params = [])
-  {
+  public function ObtenerAutoresByField($params = []){
     if (isset($params[':FIELD'])) {
       $fieldOrder = $params[':FIELD'];
     } else {
@@ -59,8 +44,7 @@ class ApiControllerAutores
   }
 
 
-  public function ObtenerAutorById($params = [])
-  {
+  public function ObtenerAutorById($params = []){
     $Id = $params[':ID'];
     if (is_numeric($Id)) {
       $autor = $this->model->GetAutorById($Id);
@@ -75,8 +59,7 @@ class ApiControllerAutores
   }
 
 
-  public function CrearAutor()
-  {
+  public function CrearAutor(){
     //if ($this->secHelper->isLoggedIn()) {
     $body = $this->getData();
     if (!empty($body->nombreApellido) && !empty($body->nacionalidad)) {
@@ -100,8 +83,7 @@ class ApiControllerAutores
   }
 
 
-  function ActualizaAutorById($params = null)
-  {
+  function ActualizaAutorById($params = null){
     if (isset($params[':ID'])) {
       $id =  $params[':ID'];
     }
