@@ -62,9 +62,9 @@ function updatelibros($t,$a,$d,$id){//edita un libro//
 }
 
  function getOrderLibros($field, $order) {
-    $consulta=('SELECT * FROM libros ORDER BY  ? ? ');
+    $consulta=('SELECT * FROM libros ORDER BY ' . $field . ' ' . $order . '');
     $query = $this->conexion->prepare($consulta);
-    $query->execute([$field,$order]);
+    $query->execute();
     return $query->fetchAll(PDO::FETCH_OBJ);
 }
 

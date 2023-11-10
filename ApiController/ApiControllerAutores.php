@@ -1,6 +1,6 @@
 <?php
 require_once 'Model/modelAutores.php';
-require_once 'ApiController/AuthHelper.php';
+
 require_once 'Apiviews/ApiView.php';
 
 class ApiControllerAutores{
@@ -14,7 +14,7 @@ function __construct(){
     $this->model = new modeloAutor();
     $this->view=new ApiView($this);
     $this->data = file_get_contents("php://input"); 
-    $this->helper= new Helper();
+   // $this->helper= new Helper();
     
 }
 
@@ -32,7 +32,7 @@ function getData(){
         if (isset($params[':FIELD'])) {
           $fieldOrder = $params[':FIELD'];
         } else {
-          $fieldOrder = 'nombre'; 
+          $fieldOrder = 'nombreApellido'; 
         };
         $columnNames = $this->model->getColumns();
         for ($i=0; $i < count($columnNames) ; $i++) { 

@@ -109,30 +109,32 @@ function deleteBook($params=[]){
                            
 
 
-                      function ObtenerLibrosByField($params = []) {
-                            if (isset($params[':FIELD'])) {
-                                $fieldOrder = $params[':FIELD'];
-                            } else {
-                                $fieldOrder = 'titulo'; 
-                            };
-                                $columnNames = $this->model->getColumns();
-                                   for ($i=0; $i < count($columnNames) ; $i++) { 
-                                       if($columnNames[$i] == $fieldOrder){
-                                          $validateField = $fieldOrder;
-                                           }
-                            } 
-                                  if (isset($params[':ORDER'])) {
-                                     $order = 'desc'; 
-                                      } else {
-                                        $order = 'asc'; 
-                                                        };
-                                           if (isset($validateField)) {
-                                               $orderedLibros = $this->model->getOrderlibros($validateField, $order);
-                                                return $this->view->response($orderedLibros, 200);
-                                                  } else {
-                                                      return $this->view->response("no existe el campo designado para ordenar = '{$fieldOrder}' en la tabla de Libros", 404);
-                                                               };
-                                                                   }
+             function ObtenerLibrosByField($params = []) {
+                        if (isset($params[':FIELD'])) {
+                          $fieldOrder = $params[':FIELD'];
+                        } else {
+                          $fieldOrder = 'titulo'; 
+                        };
+                        $columnNames = $this->model->getColumns();
+                        for ($i=0; $i < count($columnNames) ; $i++) { 
+                             if($columnNames[$i] == $fieldOrder){
+                               $validateField = $fieldOrder;
+                              }
+                        } 
+                        if (isset($params[':ORDER'])) {
+                          $order = 'desc'; 
+                        } else {
+                          $order = 'asc'; 
+                        };
+                        if (isset($validateField)) {
+                          $orderedBooks = $this->model->getOrderLibros($validateField, $order);
+                          return $this->view->response($orderedBooks, 200);
+                        } else {
+                          return $this->view->response("no existe el campo designado para ordenar = '{$fieldOrder}' en la tabla de Libros", 404);
+                        };                                                 
+                                          }
+                                             
+                                             
 
 
                         function GetPaginateBooks($params = []) {
