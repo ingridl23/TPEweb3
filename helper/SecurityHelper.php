@@ -38,7 +38,8 @@ class SecurityHelper {
     }
 
     function getAuthHeader() {
-       $user=  $this->Helper->ValidateUser();
+       $user=  $this->helper->ValidateUser();
        return $user;
     }
 }
+

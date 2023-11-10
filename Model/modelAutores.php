@@ -41,4 +41,24 @@ class modeloAutor{
         
         return $autorbyId;
     }
+
+
+    public function InsertAutor($nombreApellido, $nacionalidad){
+
+        $consulta= "INSERT INTO autor(nombreApellido, nacionalidad) VALUES(?,?)";
+        $query = $this->conexion->prepare($consulta);
+        $query->execute([$nombreApellido, $nacionalidad]);
+        $autornuevo = $query->fetchAll(PDO::FETCH_OBJ);
+        return $this->conexion->lastInsertId();
+    }
+
+    function updateAutor($nm,$n,$id){//edita un autor//
+        $consulta="UPDATE autor SET nombreApellido= '$nm',nacionalidad='$n' WHERE  id_autor= $id";
+        $query=$this->conexion->prepare($consulta);
+        $query->execute();
+       
+       
+   }
+
 }
+

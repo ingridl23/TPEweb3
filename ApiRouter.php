@@ -28,10 +28,14 @@ $router->addRoute('libros/:ID','GET','ApiControllerBooks','ObtenerBookbyId');//t
 
 $router->addRoute('autores/:ID','GET', 'ApiControllerAutores','ObtenerAutorById');//trae autor por id  // ya anda
 
-$router->addRoute('libros','POST', 'ApiControllerBooks', 'CrearLibro');//crea //todavia no anda
-$router->addRoute('autores/:ID','POST', 'ApiControllerAutores', 'CrearAutor'); //crea //todavia no anda
+$router->addRoute('libros','POST', 'ApiControllerBooks', 'CrearLibro');//crea //ya anda(agregar a readme)*
+$router->addRoute('autor','POST', 'ApiControllerAutores', 'CrearAutor'); //crea //ya anda(agregar a readme)*
 
-$router->addRoute('libros/:ID','PUT','ApiControllerBooks','ActuaLizalibroById');//actualiza/modifica  //ya anda
+
+$router->addRoute('libros/:ID','PUT','ApiControllerBooks','ActuaLizalibroById');//actualiza/modifica libro //ya anda (agregar a readme)* 
+
+$router->addRoute('autores/:ID','PUT','ApiControllerAutores','ActualizaAutorById');//actualiza/modifica autor //ya andaria (agregar a readme)*  
+
 
 $router->addRoute('libros/:ID','DELETE','ApiControllerBooks','deletebook'); // eliminar un libro en especifico //ya anda
 
