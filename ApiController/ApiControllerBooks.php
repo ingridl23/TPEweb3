@@ -1,25 +1,17 @@
 <?php
 require_once 'Model/modelBooks.php';
-require_once 'ApiController/AuthHelper.php';
-require_once 'Apiviews/ApiView.php';
-class ApiControllerBooks{
+require_once 'ApiController/ApiController.php';
+
+class ApiControllerBooks extends ApiController {
    
     private $model;
-    private $view;
-    private $data;
-    private $helper;
+ 
 
 function __construct(){
     $this->model = new ModelBooks();
-    $this->view=new ApiView($this);
-    $this->data = file_get_contents("php://input"); 
-   // $this->helper= new Helper();
-    
+  
 }
 
-function getData(){ 
-    return json_decode($this->data); 
-}  
 
  function ObtenerBooks() {
         
@@ -75,27 +67,31 @@ public function CrearLibro() {
 
  function ActualizaLibroById($params=null){
    // if ($this->Helper->validateuser()) {
-         $id = $params [':ID'];
-             if (is_numeric($id)) {
+             if (isset($params[':ID'])){
+
+               $id =  $params [':ID'];
+             }
+               if (is_numeric($id)) {
                 $body = $this->getData();
                  if(empty($body->titulo)|| empty($body->anio)|| empty($body->descripcion)){
-                  $this->model->updatelibros($body->titulo,$body->anio,$body->descripcion, $id);
-                  $this->view->response("El libro con id = '{$id}' fue editado", 200);    
+                   $this->model->updatelibros($body->titulo,$body->anio,$body->descripcion, $id);
+                   $this->view->response("El libro con id = '{$id}' fue editado", 200);    
                  }
-           
-                   
-               } else {
-                      $this->view->response("No se pudo editar el libro con id = '{$id}', asegurarse de colocar todos los campos de la tabla", 400);
-                                     };
-    // } else {
-     //      $this->view->response("No existe un libro con id = '{$id}' ", 404);
+                  else {
+                       $this->view->response("No se pudo editar el libro con id = '{$id}', asegurarse de colocar todos los campos de la tabla", 400);
+                                      };
+                                     } else {
+          $this->view->response("No existe un libro con id = '{$id}' ", 404);
      // }
 }
 
-function deleteBook($params=null){
+function deleteBook($params=[]){
 
  // if ($this->Helper->validateuser()){
-        $id = $params [':ID'];
+           if(isset($params[':ID'])){
+
+             $id = $params [':ID'];
+           }
 
         $libro= $this->model->GetbookById($id);
 
@@ -154,6 +150,7 @@ function deleteBook($params=null){
                           }
                       }
                     }
+                  }
 
 
 
