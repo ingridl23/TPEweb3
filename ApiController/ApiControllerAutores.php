@@ -22,7 +22,7 @@ class ApiControllerAutores extends ApiController{
     if (isset($params[':FIELD'])) {
       $fieldOrder = $params[':FIELD'];
     } else {
-      $fieldOrder = 'nombre';
+      $fieldOrder = 'nombreApellido';
     };
     $columnNames = $this->model->getColumns();
     for ($i = 0; $i < count($columnNames); $i++) {
@@ -31,7 +31,7 @@ class ApiControllerAutores extends ApiController{
       }
     }
     if (isset($params[':ORDER'])) {
-      $order = 'desc';
+      $order = $params[':ORDER'];
     } else {
       $order = 'asc';
     };
@@ -77,9 +77,7 @@ class ApiControllerAutores extends ApiController{
       };
     } else {
       $this->view->response("No se ha podido crear un nuevo autor, asegurese de colocar todos los campos de la tabla ", 400);
-    } //else {
-    // $this->view->response("Necesitas estar logueado para realizar la request", 401);
-    //} 
+    } 
   }
 
 

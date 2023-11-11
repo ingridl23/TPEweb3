@@ -30,7 +30,7 @@ $router->addRoute('libros/:ID','GET','ApiControllerBooks','ObtenerBookbyId');//t
 $router->addRoute('autores/:ID','GET', 'ApiControllerAutores','ObtenerAutorById');//trae autor por id
 
 $router->addRoute('libros','POST', 'ApiControllerBooks', 'CrearLibro');//crea 
-$router->addRoute('autor','POST', 'ApiControllerAutores', 'CrearAutor'); //crea 
+$router->addRoute('autores','POST', 'ApiControllerAutores', 'CrearAutor'); //crea 
 
 
 $router->addRoute('libros/:ID','PUT','ApiControllerBooks','ActuaLizalibroById');//actualiza/modifica libro 
@@ -38,7 +38,7 @@ $router->addRoute('libros/:ID','PUT','ApiControllerBooks','ActuaLizalibroById');
 $router->addRoute('autores/:ID','PUT','ApiControllerAutores','ActualizaAutorById');//actualiza/modifica autor   
 
 
-$router->addRoute('libros/:ID','DELETE','ApiControllerBooks','deletebook'); // eliminar un libro en especifico 
+$router->addRoute('libros/:ID','DELETE','ApiControllerBooks','deleteBook'); // eliminar un libro en especifico 
 
 
 

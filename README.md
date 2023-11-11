@@ -47,7 +47,7 @@ El endpoint de la API es: http://localhost/tucarpetalocal/api/
         "titulo": "Cronicas De Una novela ",
         "Anio": 2023,
         "descripcion": "nueva descripcion de la novela",
-        "id_Autor": "3"
+        "id_autor": "3"
         
  }
  ```
@@ -58,8 +58,8 @@ El endpoint de la API es: http://localhost/tucarpetalocal/api/
  ```json
   {
         "nombreApellido": "Antonio del valle",
-        "nacionalidad": "brasil",
-        "id_Autor": "8"
+        "nacionalidad": "brasil"
+     
         
  }
  ```
@@ -71,9 +71,9 @@ El endpoint de la API es: http://localhost/tucarpetalocal/api/
 ```json
 {
         "titulo": "Cronicas De Una pandemia ",
-        "Anio": 2020,
+        "anio": 2020,
         "descripcion": "Una novela que examina el comportamiento humano frente a calamidades como lo fue una pandemia en el año 2020. Y las razones de la mala organizacion social frente a situaciones que van mas alla del conocimiento humano",
-        "id_autor": 2
+        "idAutor": 2
  }
  ```
 *  ### http://localhost/tucarpetalocal/tucarpetalocal/api/autores : A partir de este endpoint y con metodo post puede crearse un nuevo autor.
@@ -82,8 +82,8 @@ El endpoint de la API es: http://localhost/tucarpetalocal/api/
 ```json
 {
     "nombreApellido":"Juan Carlos",
-    "nacionalidad":"Uruguay",
-    "idAutor": 10
+    "nacionalidad":"Uruguay"
+  
 }
 ```
 
